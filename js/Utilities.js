@@ -25,11 +25,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-// function handleDonation() {
-
-//     if (mainBalance >= addMoney) {
-//         document.getElementById('donationModal').showModal();
-//     } else {
-//         alert("You don't have enough balance to donate.");
-//     }
-// }
