@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donate Bangladesh</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <section class="fixed top-0 left-0 w-full z-50 shadow bg-yellow-50">
+
+        <div class="md:container mx-auto p-4 mb-4">
+            <!-- Header -->
+            <div class="flex justify-between  items-center  gap-3  md:gap-10">
+                <button onclick="goToPage()"
+                    class="btn mx-2 hover:bg-[#B4F461] hover:text-black transition-colors duration-200 bg-gray-200">Blog</button>
+
+                <div class="hidden md:flex gap-2 py-2">
+                    <img class="w-8 h-8 md:w-12 md:h-12" src="/assets/logo.png" alt="">
+                    <h1 class="text-xl md:text-3xl font-bold py-2">Donate Bangladesh</h1>
+                </div>
+
+
+                <div class="flex gap-2 text-black md:text-xl font-bold">
+                    <img class="md:w-7 md:h-7" src="/assets/coin.png" alt=""><span id="main-balance">5500</span>
+                    BDT
+                </div>
+            </div>
+
+        </div>
+        <!-- Header -->
+
+        <nav>
+            <div class="flex justify-center">
+                <button
+                    class="btn mx-2 hover:bg-[#B4F461] hover:text-black transition-colors duration-200 bg-gray-200">Donation</button>
+
+                <button id="histroy" onclick="goToHistory()"
+                    class="btn mx-2 hover:bg-[#B4F461] hover:text-black transition-colors duration-200 bg-gray-200">History</button>
+
+                <button onclick="resetBalance()"
+                    class="btn mx-2 hover:bg-[#B4F461] hover:text-black transition-colors duration-200 bg-gray-200">Reset
+                    Balance</button>
+
+            </div>
+        </nav>
+
+    </section>
+
+
+
+
+    <main class="md:container mx-auto pt-[180px] mb-12">
+
+
+        <!--  Cards -->
+
+        <div class="space-y-12 px-20 py-10">
+
+            <!-- Card 1 -->
+
+            <div class="card card-side shadow-xl p-4 rounded-lg flex flex-col md:flex-row items-center gap-2">
+                <img class="w-full md:w-3/4  rounded" src="/assets/noakhali.png" alt="Flood Rescue" />
+
+                <div class="md:ml-4 mt-4 md:mt-1 space-y-4 ">
+
+                    <div class="bg-gray-200 text-black flex items-center gap-1 text-lg font-bold w-32 p-2 rounded ">
+                        <img src="https://img.icons8.com/emoji/48/coin-emoji.png" alt="coin" class="w-6 h-6">
+                        <span id="balance-1" class="font-bold text-lg">2000</span>BDT
+                    </div>
+
+
+                    <h2 id="heading_1" class="font-bold text-lg mb-2">Donate for Flood at Noakhali, Bangladesh</h2>
+                    <p class="text-sm text-[rgba(17, 17, 17, 0.7)] mb-3 ">The recent floods in Noakhali have caused
+                        significant
+                        damage to homes & infrastructure. Your donation will help provide essential supplies and to
+                        those affected by this disaster. Every contribution, big or small, makes a difference.
+                        Please join us in supporting the relief efforts and making a positive impact on the lives
+                        of
+                        those in need.</p>
+                    <input id="addmoney_one" type="text" placeholder="Write Donation Amount"
+                        class="input input-bordered w-full mb-2" />
+                    <button id="btn-add-money"
+                        class="btn hover:bg-[#B4F461] hover:text-black transition-colors duration-200 bg-gray-300 w-full font-bold">Donate
+                        Now</button>
+
+                    <!-- Alert Modal -->
+                    <dialog id="donationModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box bg-yellow-100 rounded-xl shadow-lg text-center">
+                            <h3 class="font-bold text-3xl text-black mb-2">🎉 Congrats!</h3>
+                            <div class="mb-3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Coin Icon"
+                                    class="w-12 mx-auto" />
+                            </div>
+                            <p class="text-gray-600 text-sm">You Have Donated for Humankind</p>
+                            <p class="text-green-600 font-semibold text-lg mt-1">Successfully</p>
+                            <div class="modal-action justify-center mt-4">
+                                <form method="dialog">
+                                    <button class="btn btn-outline btn-sm">Close Confirmation</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+                    <dialog id="errorModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box text-center bg-yellow-100">
+                            <h3 class="font-bold text-2xl text-red-600">⚠️ Error</h3>
+                            <div class="my-3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="error"
+                                    class="w-10 mx-auto" />
+                            </div>
+                            <p class="text-gray-600 text-sm">You do not have enough balance to complete this donation.
+                            </p>
+                            <p class="text-red-500 font-semibold text-lg mt-1">Transaction Failed</p>
+                            <div class="modal-action justify-center mt-4">
+                                <form method="dialog">
+                                    <button class="btn btn-outline btn-sm">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+                    <dialog id="invalidAmountModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box text-center bg-yellow-100">
+                            <h3 class="font-bold text-2xl text-yellow-600">⚠️ Invalid Amount</h3>
+                            <img src="https://cdn-icons-png.flaticon.com/512/753/753345.png"
+                                class="w-10 mx-auto my-3" />
+                            <p class="text-sm text-gray-500">Amount must be greater than zero.</p>
+                            <form method="dialog" class="modal-action justify-center mt-4">
+                                <button class="btn btn-outline btn-sm">Close</button>
+                            </form>
+                        </div>
+                    </dialog>
+
+
+
+                </div>
+            </div>
+
+
+            <!-- Card 2 -->
+
+            <div class="card card-side shadow-xl p-4 rounded-lg flex flex-col md:flex-row items-center gap-2 ">
+                <img class="w-full md:w-3/4 rounded" src="/assets/feni.png" alt="Flood Rescue" />
+
+                <div class="md:ml-4 mt-4 md:mt-1 space-y-4">
+
+                    <div class="bg-gray-200 text-black flex items-center gap-1 text-lg font-bold w-32 p-2 rounded mb-2">
+                        <img src="https://img.icons8.com/emoji/48/coin-emoji.png" alt="coin" class="w-6 h-6">
+                        <span id="balance-2" class="font-bold text-lg">940</span>BDT
+                    </div>
+
+
+                    <h2 class="font-bold text-lg mb-2">Donate for Flood at feni, Bangladesh</h2>
+                    <p class="text-sm text-[rgba(17, 17, 17, 0.7)] mb-3">The recent floods in feni have caused
+                        significant
+                        damage to homes & infrastructure. Your donation will help provide essential supplies and to
+                        those affected by this disaster. Every contribution, big or small, makes a difference.
+                        Please join us in supporting the relief efforts and making a positive impact on the lives of
+                        those in need.</p>
+                    <input id="addmoney_two" type="text" placeholder="Write Donation Amount"
+                        class="input input-bordered w-full mb-2" />
+                    <button id="btn-add-money-two"
+                        class="btn  hover:bg-[#B4F461] hover:text-black transition-colors duration-200 bg-gray-300 w-full font-bold">Donate
+                        Now</button>
+
+                    <dialog id="donationModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box bg-yellow-100 rounded-xl shadow-lg text-center">
+                            <h3 class="font-bold text-3xl text-black mb-2">🎉 Congrats!</h3>
+                            <div class="mb-3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Coin Icon"
+                                    class="w-12 mx-auto" />
+                            </div>
+                            <p class="text-gray-600 text-sm">You Have Donated for Humankind</p>
+                            <p class="text-green-600 font-semibold text-lg mt-1">Successfully</p>
+                            <div class="modal-action justify-center mt-4">
+                                <form method="dialog">
+                                    <button class="btn btn-outline btn-sm">Close Confirmation</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+                    <dialog id="errorModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box text-center bg-yellow-100">
+                            <h3 class="font-bold text-2xl text-red-600">⚠️ Error</h3>
+                            <div class="my-3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="error"
+                                    class="w-10 mx-auto" />
+                            </div>
+                            <p class="text-gray-600 text-sm">You do not have enough balance to complete this donation.
+                            </p>
+                            <p class="text-red-500 font-semibold text-lg mt-1">Transaction Failed</p>
+                            <div class="modal-action justify-center mt-4">
+                                <form method="dialog">
+                                    <button class="btn btn-outline btn-sm">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+                    <dialog id="invalidAmountModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box text-center bg-yellow-100">
+                            <h3 class="font-bold text-2xl text-yellow-600">⚠️ Invalid Amount</h3>
+                            <img src="https://cdn-icons-png.flaticon.com/512/753/753345.png"
+                                class="w-10 mx-auto my-3" />
+                            <p class="text-sm text-gray-500">Amount must be greater than zero.</p>
+                            <form method="dialog" class="modal-action justify-center mt-4">
+                                <button class="btn btn-outline btn-sm">Close</button>
+                            </form>
+                        </div>
+                    </dialog>
+
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+
+            <div class="card card-side shadow-xl p-4 rounded-lg flex flex-col md:flex-row items-center gap-2 mb-8">
+                <img class="w-full md:w-3/4 rounded" src="/assets/quota-protest.png" alt="Flood Rescue" />
+
+                <div class="md:ml-4 mt-4 md:mt-1 space-y-4">
+
+                    <div class="bg-gray-200 text-black flex items-center gap-1 text-lg font-bold w-32 p-2 rounded">
+                        <img src="https://img.icons8.com/emoji/48/coin-emoji.png" alt="coin" class="w-5 h-5">
+                        <span id="balance-3" class="font-bold text-lg">550</span>BDT
+                    </div>
+
+
+                    <h2 class="font-bold text-lg mb-2">Donate for quota-protest, Bangladesh</h2>
+                    <p class="text-sm text-[rgba(17, 17, 17, 0.7)] ">The recent Quota movement has resulted in
+                        numerous injuries and significant hardship for many individuals. Your support is crucial in
+                        providing medical assistance, rehabilitation, and necessary supplies to those affected. By
+                        contributing, you help ensure that injured individuals receive the care and support they need
+                        during this challenging time. Every donation plays a vital role in alleviating their suffering
+                        and aiding in their recovery. Please consider making a donation to support these brave
+                        individuals in their time of need.</p>
+                    <input id="addmoney_three" type="text" placeholder="Write Donation Amount"
+                        class="input input-bordered w-full " />
+                    <button id="btn-add-money-three"
+                        class="btn  hover:bg-[#B4F461] hover:text-black transition-colors duration-200 bg-gray-300 w-full font-bold">Donate
+                        Now</button>
+
+                    <dialog id="donationModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box bg-yellow-100 rounded-xl shadow-lg text-center">
+                            <h3 class="font-bold text-3xl text-black mb-2">🎉 Congrats!</h3>
+                            <div class="mb-3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Coin Icon"
+                                    class="w-12 mx-auto" />
+                            </div>
+                            <p class="text-gray-600 text-sm">You Have Donated for Humankind</p>
+                            <p class="text-green-600 font-semibold text-lg mt-1">Successfully</p>
+                            <div class="modal-action justify-center mt-4">
+                                <form method="dialog">
+                                    <button class="btn btn-outline btn-sm">Close Confirmation</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+                    <dialog id="errorModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box text-center bg-yellow-100">
+                            <h3 class="font-bold text-2xl text-red-600">⚠️ Error</h3>
+                            <div class="my-3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="error"
+                                    class="w-10 mx-auto" />
+                            </div>
+                            <p class="text-gray-600 text-sm">You do not have enough balance to complete this donation.
+                            </p>
+                            <p class="text-red-500 font-semibold text-lg mt-1">Transaction Failed</p>
+                            <div class="modal-action justify-center mt-4">
+                                <form method="dialog">
+                                    <button class="btn btn-outline btn-sm">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+                    <dialog id="invalidAmountModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box text-center bg-yellow-100">
+                            <h3 class="font-bold text-2xl text-yellow-600">⚠️ Invalid Amount</h3>
+                            <img src="https://cdn-icons-png.flaticon.com/512/753/753345.png"
+                                class="w-10 mx-auto my-3" />
+                            <p class="text-sm text-gray-500">Amount must be greater than zero.</p>
+                            <form method="dialog" class="modal-action justify-center mt-4">
+                                <button class="btn btn-outline btn-sm">Close</button>
+                            </form>
+                        </div>
+                    </dialog>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </main>
+    <footer class="bg-yellow-50 py-2">
+
+        <div class="md:container mx-auto p-4 mb-12">
+            <!-- Header -->
+            <div class="flex justify-center  items-center  gap-3 ">
+
+                <div class="flex gap-2 py-1">
+                    <img class="w-12 h-12" src="/assets/logo.png" alt="">
+                    <h1 class="text-xl md:text-3xl font-bold py-2">Donate Bangladesh</h1>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+
+    <script src="/js/features.js"></script>
+    <script src="/js/Utilities.js"></script>
+    <script src="/js/addMoney.js"></script>
+    <script src="/js/bolg.js"></script>
+    <script src="/js/history.js"></script>
+
+</body>
+
+</html>
